@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-0_lesson
 
 # local env files
 .env.local
