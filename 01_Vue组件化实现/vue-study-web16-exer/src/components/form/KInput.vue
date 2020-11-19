@@ -5,7 +5,9 @@
 </template>
 
 <script>
+
   export default {
+    name: 'k-input',
     props: {
       value: {
         type: String,
@@ -18,6 +20,7 @@
     },
     methods: {
       onInput(e) {
+        console.log(e)
         this.$emit('input', e.target.value)
       }
     },
