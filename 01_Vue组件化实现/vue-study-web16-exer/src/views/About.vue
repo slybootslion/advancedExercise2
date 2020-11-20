@@ -1,17 +1,15 @@
 <template>
   <div>
-    <k-input v-model="userInfo.username"></k-input>
-    <p>{{userInfo.username}}</p>
+   <from-comp></from-comp>
   </div>
 </template>
 
 <script>
-import KInput from "@/components/form/KInput";
-
+import FromComp from '../components/form/index'
 export default {
   name: 'About',
   components: {
-    KInput
+    FromComp
   },
   data () {
     return {
