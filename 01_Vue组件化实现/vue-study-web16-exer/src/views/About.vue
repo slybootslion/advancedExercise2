@@ -1,7 +1,7 @@
 <template>
   <div>
     <k-input v-model="userInfo.username"></k-input>
-    <p>{{username}}</p>
+    <p>{{userInfo.username}}</p>
   </div>
 </template>
 
