@@ -7498,7 +7498,7 @@
 
     if (keysA.length !== keysB.length) {
       return false;
-    } // Test for A's keys different from B.
+    } // Lifecycle for A's keys different from B.
 
 
     for (var i = 0; i < keysA.length; i++) {
@@ -25853,7 +25853,7 @@
       scheduleRoot:  scheduleRoot ,
       setRefreshHandler:  setRefreshHandler ,
       // Enables DevTools to append owner stacks to error messages in DEV mode.
-      getCurrentFiber:  getCurrentFiberForDevTools 
+      getCurrentFiber:  getCurrentFiberForDevTools
     });
   }
 
