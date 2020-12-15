@@ -10,7 +10,7 @@ class Main extends Component {
       list: [1, 2, 3]
     }
   }
-  // 7 -> 42.37
+
   render () {
     const { list } = this.state
     return (
@@ -18,7 +18,7 @@ class Main extends Component {
         main
         <Banner/>
         <GoodsList list={list} changeFun={() => this.changeProps()}/>
-        <GoodsList/>
+        {/*<GoodsList/>*/}
       </div>
     );
   }
