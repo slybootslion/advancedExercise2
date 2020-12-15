@@ -4,12 +4,23 @@
   <meta charset="UTF-8">
   <title>exercise 02</title>
   <style>
-    .box.title {
-      display: none;
+    table,
+    th, td {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
     }
 
-    .box.title.active {
-      display: block;
+    th, td {
+      padding: 10px 16px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ededed;
+    }
+
+    .count {
+      margin: 0 10px;
     }
   </style>
 </head>
@@ -18,66 +29,121 @@
 <script src="../00_lib/react.development.js"></script>
 <script src="../00_lib/react-dom.development.js"></script>
 <script src="../00_lib/babel.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+function formatPrice (price) {
+  if (typeof price !== 'number') {
+    price = Number(price) || 0
+  }
+  return `￥${price.toFixed(2)}`
+}
+</script>
 <script type="text/babel">
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      title: 'title属性',
-      imgUrl: 'https://thinkpad.slybootslion.com/images/link/steam.png',
-      active: true
+      books: [
+        {
+          id: 1,
+          name: '《算法导论》',
+          date: '2006-9',
+          price: 85.00,
+          count: 2
+        },
+        {
+          id: 2,
+          name: '《UNIX编程艺术》',
+          date: '2006-2',
+          price: 59.00,
+          count: 1
+        },
+        {
+          id: 3,
+          name: '《编程珠玑》',
+          date: '2008-10',
+          price: 39.00,
+          count: 1
+        },
+        {
+          id: 4,
+          name: '《代码大全》',
+          date: '2006-3',
+          price: 128.00,
+          count: 1
+        },
+      ]
     }
-
-    this.clickFun = this.clickFun.bind(this)
   }
 
-  clickFunFin () {
-    this.setState({
-      active: !this.state.active
-    })
+  findBookIndex (book) {
+    let { books } = this.state
+    return books.findIndex(b => b.id === book.id)
   }
 
-  clickFun1 () {
-    this.setState({
-      active: !this.state.active
-    })
+  sub (book) {
+    let { books } = this.state
+    const index = this.findBookIndex(book)
+    --books[index].count
+    this.setState({ books })
   }
 
-  clickFun2 = () => {
-    this.setState({
-      active: !this.state.active
-    })
+  add (book) {
+    let { books } = this.state
+    const index = this.findBookIndex(book)
+    ++books[index].count
+    this.setState({ books })
   }
 
-  clickFun () {
-    this.setState({
-      active: !this.state.active
-    })
+  remove (book) {
+    let { books } = this.state
+    books = books.filter(b => b.id !== book.id)
+    this.setState({ books })
+  }
+
+  renderBooks () {
+    const { books } = this.state
+    return (
+      <div>
+        <table>
+          <thead>
+          <tr>
+            <th></th>
+            <th>书名</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+            books.map((book, index) => {
+              return (<tr key={index}>
+                <td>{book.id}</td>
+                <td>{book.name}</td>
+                <td>{book.date}</td>
+                <td>{formatPrice(book.price)}</td>
+                <td>
+                  <button disabled={book.count <= 1} onClick={() => this.sub(book)}>-</button>
+                  <span className="count">{book.count}</span>
+                  <button onClick={() => this.add(book)}>+</button>
+                </td>
+                <td>
+                  <button onClick={() => this.remove(book)}>移除</button>
+                </td>
+              </tr>)
+            })
+          }
+          </tbody>
+        </table>
+        <h3>总价格：{formatPrice(books.reduce((a, b) => a + b.count * b.price, 0))}</h3>
+      </div>
+    )
   }
 
   render () {
-    const { title, imgUrl, active } = this.state
-
-    const divStyle = {
-      width: '70px',
-      height: '70px',
-      backgroundColor: '#ccc',
-      float: 'left'
-    }
-
     return (
-      <div>
-        {/* 注释 */}
-        <h2 title={title}>标题</h2>
-        <img src={imgUrl} title="阀门" alt={title}/>
-        <div className={"box title" + (active ? ' active' : '')}>div box</div>
-        <div style={{ color: 'red', backgroundColor: 'yellow' }}>style div</div>
-        <div style={divStyle} onClick={this.clickFun}>click div1</div>
-        <div style={divStyle} onClick={this.clickFun1.bind(this)}>this解决方式1</div>
-        <div style={divStyle} onClick={this.clickFun2}>this解决方式2</div>
-        <div style={divStyle} onClick={() => this.clickFunFin()}>this解决方式3</div>
-        <div>{active ? 'active on' : 'active off'}</div>
-      </div>
+      !this.state.books.length ? <div>数据为空</div> : this.renderBooks()
     )
   }
 }

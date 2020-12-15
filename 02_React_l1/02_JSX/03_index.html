@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>exercise 02</title>
+  <style>
+    .box.title {
+      display: none;
+    }
+
+    .box.title.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script src="../00_lib/react.development.js"></script>
+<script src="../00_lib/react-dom.development.js"></script>
+<script src="../00_lib/babel.min.js"></script>
+<script type="text/babel">
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      title: 'title属性',
+      imgUrl: 'https://thinkpad.slybootslion.com/images/link/steam.png',
+      active: true
+    }
+
+    this.clickFun = this.clickFun.bind(this)
+  }
+
+  clickFunFin () {
+    this.setState({
+      active: !this.state.active
+    })
+  }
+
+  clickFun1 () {
+    this.setState({
+      active: !this.state.active
+    })
+  }
+
+  clickFun2 = () => {
+    this.setState({
+      active: !this.state.active
+    })
+  }
+
+  clickFun () {
+    this.setState({
+      active: !this.state.active
+    })
+  }
+
+  render () {
+    const { title, imgUrl, active } = this.state
+
+    const divStyle = {
+      width: '70px',
+      height: '70px',
+      backgroundColor: '#ccc',
+      float: 'left'
+    }
+
+    return (
+      <div>
+        {/* 注释 */}
+        <h2 title={title}>标题</h2>
+        <img src={imgUrl} title="阀门" alt={title}/>
+        <div className={"box title" + (active ? ' active' : '')}>div box</div>
+        <div style={{ color: 'red', backgroundColor: 'yellow' }}>style div</div>
+        <div style={divStyle} onClick={this.clickFun}>click div1</div>
+        <div style={divStyle} onClick={this.clickFun1.bind(this)}>this解决方式1</div>
+        <div style={divStyle} onClick={this.clickFun2}>this解决方式2</div>
+        <div style={divStyle} onClick={() => this.clickFunFin()}>this解决方式3</div>
+        <div>{active ? 'active on' : 'active off'}</div>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'))
+</script>
+</body>
+</html>
