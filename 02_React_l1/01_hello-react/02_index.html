@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>basic 02</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="../00_lib/react.development.js"></script>
+<script src="../00_lib/react-dom.development.js"></script>
+<script src="../00_lib/babel.min.js"></script>
+
+<script type="text/babel">
+const app = document.querySelector('#app')
+let msg = 'hello world'
+
+function render() {
+  ReactDOM.render(<div>
+    <h2>{msg}</h2>
+    <button onClick={btnClick}>改变文本</button>
+  </div>, app)
+}
+render()
+
+function btnClick () {
+  msg = 'hello react'
+  render()
+}
+</script>
+</body>
+</html>

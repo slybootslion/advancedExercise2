@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>exercise 01</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="../00_lib/react.development.js"></script>
+<script src="../00_lib/react-dom.development.js"></script>
+<script src="../00_lib/babel.min.js"></script>
+<script type="text/babel">
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      title: '列表',
+      list: ['list1', 'list2', 'list3', 'list4']
+    }
+  }
+
+  render () {
+    return (
+      <div>
+        <h2>{this.state.title}</h2>
+        <ul>
+          {this.state.list.map((item, idx) => <li key={idx}>{item}</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'))
+</script>
+</body>
+</html>

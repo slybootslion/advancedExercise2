@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>basic 01</title>
+</head>
+<body>
+<h2 class="title"></h2>
+<button class="btn">改变文本</button>
+<script type="text/javascript" charset="utf-8">
+let msg = 'hello world'
+const titleEl = document.querySelector('.title')
+titleEl.innerHTML = msg
+
+const btnEl = document.querySelector('.btn')
+btnEl.addEventListener('click', e => {
+  msg = 'hello react'
+  titleEl.innerHTML = msg
+})
+</script>
+</body>
+</html>
