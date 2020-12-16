@@ -23,7 +23,6 @@ class App extends Component {
       <div>
         <TabControl titles={title} itemClick={idx => this.itemClick(idx)}/>
         <h2>{this.contentTxt[currentIndex]}</h2>
-
         <NavBar leftSlot={<div>a</div>}
                 centerSlot={<span>b</span>}
                 rightSlot={<span>c</span>}/>
