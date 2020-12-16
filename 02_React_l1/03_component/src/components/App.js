@@ -3,8 +3,6 @@ import TabControl from "./TabControl";
 import NavBar from "./NavBar";
 import './style.scss'
 
-/*1.44.02*/
-
 class App extends Component {
   constructor (props) {
     super(props);
