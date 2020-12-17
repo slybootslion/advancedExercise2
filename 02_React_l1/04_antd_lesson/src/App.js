@@ -1,69 +1,62 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
+import CommentInput from "./components/CommentInput";
+import CommentItem from "./components/CommentItem";
 
-import { Button } from 'antd';
+import styled from 'styled-components'
 
-import { PoweroffOutlined } from '@ant-design/icons';
+const ContainerDiv = styled.div`
+  width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
 
-// 1.35.52
+  .textarea {
+    resize: none;
+  }
+
+  .add-btn {
+    margin-top: 20px;
+    float: right;
+  }
+
+  .del-icon {
+    display: flex;
+    align-items: center;
+
+    .del-txt {
+      margin-left: 5px;
+    }
+  }
+`
 
 class App extends PureComponent {
-  state = {
-    loadings: [],
-  };
-
-  enterLoading = index => {
-    this.setState(({ loadings }) => {
-      const newLoadings = [...loadings];
-      newLoadings[index] = true;
-
-      return {
-        loadings: newLoadings,
-      };
-    });
-    setTimeout(() => {
-      this.setState(({ loadings }) => {
-        const newLoadings = [...loadings];
-        newLoadings[index] = false;
-
-        return {
-          loadings: newLoadings,
-        };
-      });
-    }, 6000);
-  };
-
+  constructor (props) {
+    super(props);
+    this.state = {
+      commentList: []
+    }
+  }
 
   render () {
-    const { loadings } = this.state
+    const { commentList } = this.state
     return (
-      <>
-        <Button type="primary" loading>
-          Loading
-        </Button>
-        <Button type="primary" size="small" loading>
-          Loading
-        </Button>
-        <Button type="primary" icon={<PoweroffOutlined/>} loading/>
-        <br/>
-        <Button type="primary" loading={loadings[0]} onClick={() => this.enterLoading(0)}>
-          Click me!
-        </Button>
-        <Button
-          type="primary"
-          icon={<PoweroffOutlined/>}
-          loading={loadings[1]}
-          onClick={() => this.enterLoading(1)}
-        >
-          Click me!
-        </Button>
-        <Button
-          type="primary"
-          icon={<PoweroffOutlined/>}
-          loading={loadings[2]}
-          onClick={() => this.enterLoading(2)}
-        />
-      </>
+      <ContainerDiv>
+        {commentList.map(item => <CommentItem key={item.id} comment={item} handleDel={this.handleDel.bind(this)}/>)}
+        <CommentInput handleSubmit={this.handleSubmit.bind(this)}/>
+      </ContainerDiv>
     );
+  }
+
+  handleSubmit (data) {
+    const commentList = [...this.state.commentList]
+    commentList.push(data)
+    this.setState({
+      commentList
+    })
+  }
+
+  handleDel (id) {
+    const commentList = [...this.state.commentList]
+    this.setState({ commentList: commentList.filter(comment => comment.id !== id) })
   }
 }
 
