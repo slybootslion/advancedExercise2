@@ -22,9 +22,11 @@ class CommentInput extends PureComponent {
                   rows={5}
                   value={txt}
                   onChange={e => this.txtChange(e)}/>
-        <Button className={'add-btn'} type={'primary'} onClick={() => this.onSubmit()}>
-          add comment
-        </Button>
+        <div className={'btn-input'}>
+          <Button className={'add-btn'} type={'primary'} onClick={() => this.onSubmit()}>
+            add comment
+          </Button>
+        </div>
       </Fragment>
     );
   }

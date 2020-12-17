@@ -13,9 +13,13 @@ const ContainerDiv = styled.div`
     resize: none;
   }
 
-  .add-btn {
-    margin-top: 20px;
-    float: right;
+  .btn-input {
+    margin-top: 10px;
+    height: 32px;
+
+    .add-btn {
+      float: right;
+    }
   }
 
   .del-icon {
