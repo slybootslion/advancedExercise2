@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { EventEmitter } from 'events'
 
 export const eventBus = new EventEmitter()
@@ -6,9 +6,9 @@ export const eventBus = new EventEmitter()
 class Header extends PureComponent {
   render () {
     return (
-      <div>
-        <button onClick={() => this.toFooter()}>msg to footer</button>
-      </div>
+      <Fragment>
+        <button onClick={() => this.toFooter()}>use events trigger msg to footer</button>
+      </Fragment>
     );
   }
 

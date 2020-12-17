@@ -10,8 +10,8 @@ class RefComponet extends PureComponent {
   render () {
     return (
       <div>
-        <h2 ref='ref1'>ref 1</h2>
-        <button onClick={() => this.change1()}>change ref 1</button>
+        {/*<h2 ref='ref1'>ref 1</h2>*/}
+        {/*<button onClick={() => this.change1()}>change ref 1</button>*/}
         <h2 ref={this.ref2}>ref 2</h2>
         <button onClick={() => this.change2()}>change ref 2</button>
         <h2 ref={el => this.ref3 = el}>ref 3</h2>
@@ -35,5 +35,3 @@ class RefComponet extends PureComponent {
 }
 
 export default RefComponet;
-
-// 9. 1.36.47
