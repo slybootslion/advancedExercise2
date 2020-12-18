@@ -5,13 +5,16 @@ import App from './App';
 // import 'antd/dist/antd.css'
 import 'antd/dist/antd.less'
 import AxiosPage from "./AxiosPage";
+import TransitionPage from "./TransitionPage";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <p>---ant design---</p>
     <App/>
     <p>---axios---</p>
-    <AxiosPage />
-  </React.StrictMode>,
+    <AxiosPage/>
+    <p>---transition---</p>
+    <TransitionPage/>
+  </>,
   document.getElementById('root')
 );

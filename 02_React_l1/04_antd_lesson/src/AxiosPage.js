@@ -27,13 +27,13 @@ class AxiosPage extends PureComponent {
   }
 
   async getReq () {
-    console.log('发送get请求')
+    console.log('get: --->')
     const res = await getRequest()
     console.log(res.args)
   }
 
   async postReq () {
-    console.log('发送post请求')
+    console.log('post: --->')
     const data = { name: 'baidu', age: 10 }
     const res = await postRequest(data)
     console.log(JSON.parse(res.data))
