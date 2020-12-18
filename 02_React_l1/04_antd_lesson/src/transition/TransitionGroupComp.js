@@ -71,7 +71,7 @@ class TransitionGroupComp extends PureComponent {
                                  timeout={300}
                                  classNames={'item'}>
                     <div>
-                      {name}
+                      {name} <Button onClick={() => this.remove(name)}>del</Button>
                     </div>
                   </CSSTransition>
                 )
@@ -85,6 +85,12 @@ class TransitionGroupComp extends PureComponent {
         </div>
       </ContainerDiv>
     );
+  }
+
+  remove (value) {
+    this.setState({
+      names: this.state.names.filter(name => name !== value)
+    })
   }
 
   add () {
