@@ -1,0 +1,14 @@
+{
+  "name": "05_1_redux_basic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --experimental-modules index.js"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.6",
+    "redux": "^4.0.5"
+  }
+}
