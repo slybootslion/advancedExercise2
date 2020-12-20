@@ -6,7 +6,6 @@ class ContainerPage extends PureComponent {
   render () {
     const recommendList = this.props.recommend
     const bannerList = this.props.banner
-    console.log(bannerList)
     return (
       <div>
         <div className="banner-box">
@@ -15,7 +14,7 @@ class ContainerPage extends PureComponent {
         <div className="recommend-box">
           {
             bannerList.map(b => (
-              <a href={b.link} target='_blank' key={b.acm}>
+              <a href={b.link} key={b.acm}>
                 <img src={b.image} alt=""/>
               </a>
             ))
@@ -23,7 +22,7 @@ class ContainerPage extends PureComponent {
           <p>----</p>
           {
             recommendList.map(r => (
-              <a href={r.link} key={r.acm} target='_blank'>
+              <a href={r.link} key={r.acm}>
                 <img src={r.image} alt=""/>
               </a>
             ))
