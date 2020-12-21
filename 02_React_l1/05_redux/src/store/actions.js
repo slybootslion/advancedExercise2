@@ -8,7 +8,6 @@ export const bannerAction = banner => ({ type: CHANGE_BANNER, banner })
 export const recommendAction = recommend => ({ type: CHANGE_RECOMMEND, recommend })
 
 export const getPageDataAction = dispatch => {
-  console.log('action', dispatch)
   axios({
     url: 'http://123.207.32.32:8000/home/multidata'
   }).then(res => {
