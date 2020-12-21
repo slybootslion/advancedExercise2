@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_NUMBER, CHANGE_BANNER, SUB_NUMBER, CHANGE_RECOMMEND } from "./constants.js";
+import { ADD_NUMBER, CHANGE_BANNER, SUB_NUMBER, CHANGE_RECOMMEND, FETCH_PAGE_DATA } from "./constants.js";
 
 export const addAction = num => ({ type: ADD_NUMBER, num })
 export const subAction = num => ({ type: SUB_NUMBER, num })
@@ -16,4 +16,8 @@ export const getPageDataAction = dispatch => {
     dispatch(bannerAction(banner.list))
     dispatch(recommendAction(recommend.list))
   })
+}
+
+export const fetchPageDataAction = {
+  type: FETCH_PAGE_DATA
 }

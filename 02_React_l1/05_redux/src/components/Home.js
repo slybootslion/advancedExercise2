@@ -14,7 +14,7 @@ function Home (props) {
   );
 }
 
-const mapStateToProps = state => ({ count: state.count })
+const mapStateToProps = state => ({ count: state.numInfo.count })
 const mapDispatchToProps = dispatch => {
   return {
     add (num) {

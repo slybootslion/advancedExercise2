@@ -34,8 +34,8 @@ class ContainerPage extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  banner: state.banner,
-  recommend: state.recommend
+  banner: state.pageInfo.banner,
+  recommend: state.pageInfo.recommend
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContainerPage);

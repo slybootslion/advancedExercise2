@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { getPageDataAction } from "../store/actions";
+import { fetchPageDataAction } from "../store/actions";
 import { connect } from "react-redux";
 import ContainerPage from "./ContainerPage";
 
@@ -18,14 +18,15 @@ class ShopPage extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  banner: state.banner,
-  recommend: state.recommend
+  banner: state.pageInfo.banner,
+  recommend: state.pageInfo.recommend
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     getShopData () {
-      dispatch(getPageDataAction)
+      // dispatch(getPageDataAction)
+      dispatch(fetchPageDataAction)
     }
   }
 }
