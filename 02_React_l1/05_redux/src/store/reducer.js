@@ -1,5 +1,5 @@
 import { ADD_NUMBER, CHANGE_BANNER, CHANGE_RECOMMEND, SUB_NUMBER } from "./constants.js";
-
+import { combineReducers } from 'redux'
 // const initState = {
 //   count: 0,
 //   banner: [],
@@ -28,11 +28,16 @@ function pageReducer (state = { banner: [], recommend: [] }, action) {
   }
 }
 
-function reducer (state = {}, action) {
-  return {
-    numInfo: numReducer(state.numInfo, action),
-    pageInfo: pageReducer(state.pageInfo, action),
-  }
-}
+// function reducer (state = {}, action) {
+//   return {
+//     numInfo: numReducer(state.numInfo, action),
+//     pageInfo: pageReducer(state.pageInfo, action),
+//   }
+// }
+
+const reducer = combineReducers({
+  numInfo: numReducer,
+  pageInfo: pageReducer,
+})
 
 export default reducer
