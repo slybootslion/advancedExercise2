@@ -1,12 +1,18 @@
 import React, { memo } from 'react'
-import { connect } from 'react-redux'
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
-import mapDispatchToProps from "react-redux/lib/connect/mapDispatchToProps";
 
-function LuRecommend () {
+import LuBanner from "./c-cpns/banner";
+import { RecommendWrapper } from "./style";
+
+function LuRecommend (props) {
   return (
-    <div>LuRecommend</div>
+    <RecommendWrapper>
+      <LuBanner/>
+      <div className="content">
+        <div className="recommend-left"> </div>
+        <div className="recommend-right"> </div>
+      </div>
+    </RecommendWrapper>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(LuRecommend))
+export default memo(LuRecommend)
