@@ -81,11 +81,13 @@ export const BannerWrapper = styled.div`
 
       .left {
         left: -68px;
+        top: -20px;
         background-position: 0 -360px;
       }
 
       .right {
         right: -68px;
+        top: -20px;
         background-position: 0 -508px;
       }
     }
