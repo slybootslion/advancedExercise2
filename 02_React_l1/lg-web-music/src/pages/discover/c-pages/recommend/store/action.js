@@ -31,6 +31,11 @@ const changeOriginRankingAction = originRanking => ({
   originRanking
 })
 
+const changePlayerRankingAction = playerRanking => ({
+  type: actionType.CHANGE_PALYER_RANKING,
+  playerRanking
+})
+
 export const getBannerAction = () => {
   return async dispatch => {
     const res = await getBanner()
@@ -68,6 +73,7 @@ export const getTopListAction = (idx = 0) => {
           dispatch(changeOriginRankingAction(playlist))
           break
         default:
+          dispatch(changePlayerRankingAction(playlist))
           break
       }
     }

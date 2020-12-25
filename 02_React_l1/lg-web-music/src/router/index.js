@@ -9,6 +9,7 @@ import LuArtist from '@/pages/discover/c-pages/artist'
 import LuAlbum from '@/pages/discover/c-pages/album'
 import LuMine from '@/pages/mine'
 import LuFriend from '@/pages/friend'
+import LuPlayer from "../pages/player";
 
 const routes = [
   {
@@ -63,6 +64,10 @@ const routes = [
     path: '/friend',
     component: LuFriend
   },
+  {
+    path: '/song/:id',
+    component: LuPlayer
+  }
 ]
 
 export default routes

@@ -8,16 +8,18 @@ import routes from '@/router'
 import store from '@/store'
 
 // 组件
-import LuAppHeader from '@components/app-header'
+// import LuAppHeader from '@components/app-header'
 import LuAppFooter from '@components/app-footer'
+import AppPlayerBar from "./pages/player/app-player-bar";
 
 export default memo(function App () {
   return (
     <Provider store={store}>
       <HashRouter>
-        <LuAppHeader/>
+        {/*<LuAppHeader/>*/}
         {renderRoutes(routes)}
         <LuAppFooter/>
+        <AppPlayerBar/>
       </HashRouter>
     </Provider>
   )

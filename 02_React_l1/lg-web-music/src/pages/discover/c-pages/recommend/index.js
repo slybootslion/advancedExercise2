@@ -16,7 +16,7 @@ function LuRecommend (props) {
           <LuNewAlbum/>
           <LuRecommendRanking/>
         </div>
-        <div className="recommend-right"></div>
+        <div className="recommend-right">没有做</div>
       </div>
     </RecommendWrapper>
   )
