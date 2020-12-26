@@ -1,6 +1,6 @@
 const devBaseURL = 'http://123.207.32.32:9001'
 // const devBaseURL = 'http://n1.sketchmac.com'
-const provBaseURL = 'http://n1.sketchmac.com'
+const provBaseURL = 'http://123.207.32.32:9001'
 
 const isDev = process.env.NODE_ENV === 'development'
 

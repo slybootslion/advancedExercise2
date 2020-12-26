@@ -29,7 +29,7 @@ function LuPlayer () {
           <div className="player-left">
             <div style={{ height: '1000px' }}>
               <div className="pic">
-                <img src={getSizeImage(al.picUrl, 206, 205)} alt=""/>
+                <img src={getSizeImage(al?.picUrl, 206, 205)} alt=""/>
               </div>
             </div>
           </div>

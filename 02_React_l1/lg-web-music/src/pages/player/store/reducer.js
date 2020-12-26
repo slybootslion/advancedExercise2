@@ -1,10 +1,12 @@
 import { Map } from "immutable";
 import * as actionType from './constants'
+import { originList } from "../../../mock-data";
 
 const defaultState = Map({
   playingSong: {},
-  playList: [],
+  playList: originList,
   currentSongIndex: 0,
+  sequence: 1, // 1顺序 2随机 3单曲
 })
 
 function reducer (state = defaultState, action) {
@@ -15,6 +17,8 @@ function reducer (state = defaultState, action) {
       return state.set('playList', action.playList)
     case actionType.CHANGE_CURRENT_SONG_INDEX:
       return state.set('currentSongIndex', action.index)
+    case actionType.CHANGE_SEQUENCE:
+      return state.set('sequence', action.sequence)
     default:
       return state
   }

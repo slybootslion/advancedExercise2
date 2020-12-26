@@ -154,9 +154,9 @@ export const AppPlayerBarWrapper = styled.div`
         .loop {
           background-position: ${props => {
             switch (props.sequence) {
-              case 1:
-                return "-66px -248px"
               case 2:
+                return "-66px -248px"
+              case 3:
                 return "-66px -344px"
               default:
                 return "-3px -344px"
@@ -167,6 +167,14 @@ export const AppPlayerBarWrapper = styled.div`
         .playlist {
           width: 59px;
           background-position: -42px -68px;
+          position: relative;
+        }
+
+        .list-count {
+          color: #ffffff;
+          position: absolute;
+          right: 20px;
+          top: 5px;
         }
       }
     }

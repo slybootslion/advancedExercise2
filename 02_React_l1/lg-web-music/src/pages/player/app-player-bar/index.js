@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { Slider } from "antd";
 
 import { AppPlayerBarWrapper } from "./style";
-import { getPlayingSongAction } from "../store/action";
+import { changeCurrentSongAction, changeSequenceAction, getPlayingSongAction } from "../store/action";
 import { formatMinuteSecond, formatSongUrlById, getSizeImage } from "../../../utils/format-utils";
 
 function AppPlayerBar (props) {
@@ -17,8 +17,10 @@ function AppPlayerBar (props) {
   const [sliderLock, setSliderLock] = useState(false)
 
   // redux hooks
-  const { song } = useSelector(state => ({
-    song: state.getIn(['player', 'playingSong'])
+  const { song, sequence, playList } = useSelector(state => ({
+    song: state.getIn(['player', 'playingSong']),
+    playList: state.getIn(['player', 'playList']),
+    sequence: state.getIn(['player', 'sequence'])
   }), shallowEqual)
   //
   const dispatch = useDispatch()
@@ -31,9 +33,11 @@ function AppPlayerBar (props) {
   const audioRef = useRef()
 
   // useEffect(() => dispatch(getPlayingSongAction(436514312)), [dispatch])
-  useEffect(() => dispatch(getPlayingSongAction(28111471)), [dispatch])
+  useEffect(() => dispatch(getPlayingSongAction(playList[0].id)), [dispatch, playList])
 
-  useEffect(() => setSongUrl(formatSongUrlById(id)), [id])
+  useEffect(() => {
+    changeSong()
+  })
 
   const changeValue = useCallback(async e => {
     setSliderLock(true)
@@ -47,10 +51,42 @@ function AppPlayerBar (props) {
   }, [dt])
 
   // methods
+  function asyncFn (fun) {
+    return new Promise(resolve => {
+      fun()
+      resolve()
+    })
+  }
+
+  function changeSong () {
+    asyncFn(() => setSongUrl(formatSongUrlById(id)))
+      .then(res => {
+        if (playStatus) {
+          audioRef.current.play()
+            .then(res => setPlayStatus(true))
+            .catch(err => {
+              dispatch(changeCurrentSongAction(1))
+              setPlayStatus(true)
+            })
+        }
+      })
+  }
 
   async function playMusic () {
     playStatus ? audioRef.current.pause() : audioRef.current.play()
     setPlayStatus(!playStatus)
+  }
+
+  function changeMusic (tag) {
+    dispatch(changeCurrentSongAction(tag))
+  }
+
+  function handleEnded () {
+    if (sequence !== 3) {
+      dispatch(changeCurrentSongAction(1))
+      return
+    }
+    changeSong()
   }
 
   function tipTimeChange () {
@@ -65,21 +101,30 @@ function AppPlayerBar (props) {
 
   function goPlayPage () {
     history.push({
-      pathname:'/song/'+ id,
+      pathname: '/song/' + id,
     })
   }
 
+  function changeSequence () {
+    const seq = sequence >= 3 ? 1 : sequence + 1
+    dispatch(changeSequenceAction(seq))
+  }
+
   return (
-    <AppPlayerBarWrapper className="sprite_player" isPlaying={playStatus}>
+    <AppPlayerBarWrapper className="sprite_player"
+                         isPlaying={playStatus}
+                         sequence={sequence}>
       <div className="content wrap-v2">
         <div className="control">
-          <button className="sprite_player prev"/>
+          <button className="sprite_player prev"
+                  onClick={() => changeMusic(-1)}/>
           <button className="sprite_player play"
-                  onClick={() => playMusic()}/>
-          <button className="sprite_player next"/>
+                  onClick={playMusic}/>
+          <button className="sprite_player next"
+                  onClick={() => changeMusic(1)}/>
         </div>
         <div className="playinfo">
-          <div className="image" onClick={() => goPlayPage()}>
+          <div className="image" onClick={goPlayPage}>
             <img src={getSizeImage(al?.picUrl, 34, 35)} alt=""/>
           </div>
           <div className="info">
@@ -89,7 +134,7 @@ function AppPlayerBar (props) {
             </div>
             <div className="progress">
               <Slider defautValue={0}
-                      tipFormatter={() => tipTimeChange()}
+                      tipFormatter={tipTimeChange}
                       onChange={changeValue}
                       onAfterChange={valueChanged}
                       value={sliderNum}/>
@@ -108,13 +153,16 @@ function AppPlayerBar (props) {
           </div>
           <div className="right sprite_player">
             <button className="sprite_player btn volume"/>
-            <button className="sprite_player btn loop"/>
+            <button className="sprite_player btn loop"
+                    onClick={changeSequence}/>
             <button className="sprite_player btn playlist"/>
+            <span className="list-count">{playList.length}</span>
           </div>
         </div>
       </div>
       <audio src={songUrl}
              ref={audioRef}
+             onEnded={handleEnded}
              onTimeUpdate={timeUpdate}/>
     </AppPlayerBarWrapper>
   )
