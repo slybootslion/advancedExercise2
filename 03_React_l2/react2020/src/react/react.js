@@ -1,3 +1,5 @@
+import Component from "./Component";
+
 function createElement (type, config, children) {
   const props = config
   if (arguments.length > 4) {
@@ -9,6 +11,10 @@ function createElement (type, config, children) {
   }
 }
 
-const React = { createElement }
+const React = { createElement, Component }
+
+export {
+  Component
+}
 
 export default React

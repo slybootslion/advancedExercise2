@@ -1,13 +1,10 @@
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import React from './react/react';
-import ReactDOM from './react/react-dom.js';
-
-const element = (
-  <div className="title" style={{ color: 'red', backgroundColor: 'yellow' }}>
-    <span>hello</span> react
-  </div>
-)
+import ReactDOM from './react/react-dom';
+import App from "./App";
 
 ReactDOM.render(
-  element,
+  <App name="react"><span>children elem</span></App>,
   document.getElementById('root')
 );

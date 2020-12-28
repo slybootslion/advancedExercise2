@@ -3,12 +3,20 @@ function render (vdom, container) {
   container.appendChild(dom)
 }
 
-function createDOM (vdom) {
+export function createDOM (vdom) {
   if (typeof vdom === 'string' || typeof vdom === 'number') {
     return document.createTextNode(vdom)
   }
   const { type, props } = vdom
-  const dom = document.createElement(type)
+  let dom
+  if (typeof type === 'function') {
+    if (type.isReactComponent) {
+      return mountClassComponent(vdom)
+    }
+    return mountFunctionComponent(vdom)
+  } else {
+    dom = document.createElement(type)
+  }
   updateProps(dom, props)
   if (typeof props.children === 'string' || typeof props.children === 'number') {
     dom.textContent = props.children
@@ -21,6 +29,21 @@ function createDOM (vdom) {
   }
   // vdom.dom = dom
   return dom
+}
+
+function mountClassComponent (vdom) {
+  const { type, props } = vdom
+  const classInstance = new type(props)
+  const renderVDom = classInstance.render()
+  const dom = createDOM(renderVDom)
+  classInstance.dom = dom
+  return dom
+}
+
+function mountFunctionComponent (vdom) {
+  const { type: functionComponent, props } = vdom
+  const renderVDom = functionComponent(props)
+  return createDOM(renderVDom)
 }
 
 function reconcileChildren (childrenVDom, parentDOM) {
@@ -41,6 +64,9 @@ function updateProps (dom, props) {
             dom.style[attr] = styleObj[attr]
           }
         }
+      } else if (propsKey.startsWith('on')) {
+        // 真实dom加属性
+        dom[propsKey.toLocaleLowerCase()] = props[propsKey]
       } else {
         dom[propsKey] = props[propsKey]
       }
