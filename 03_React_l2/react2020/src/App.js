@@ -14,9 +14,10 @@ class AppComponent extends Component {
   }
 
   add () {
-    this.setState({
-      num: this.state.num + 1
-    })
+    this.setState({ num: this.state.num + 1 }, () => console.log('cb1', this.state.num))
+    console.log(this.state.num)
+    this.setState({ num: this.state.num + 1 }, () => console.log('cb2', this.state.num))
+    console.log(this.state.num)
   }
 
   render () {

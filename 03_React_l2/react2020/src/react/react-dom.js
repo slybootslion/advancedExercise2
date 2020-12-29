@@ -1,3 +1,5 @@
+import { addEvent } from './event'
+
 function render (vdom, container) {
   const dom = createDOM(vdom)
   container.appendChild(dom)
@@ -66,7 +68,8 @@ function updateProps (dom, props) {
         }
       } else if (propsKey.startsWith('on')) {
         // 真实dom加属性
-        dom[propsKey.toLocaleLowerCase()] = props[propsKey]
+        // dom[propsKey.toLocaleLowerCase()] = props[propsKey]
+        addEvent(dom, propsKey.toLocaleLowerCase(), props[propsKey])
       } else {
         dom[propsKey] = props[propsKey]
       }
