@@ -38,7 +38,7 @@ class ChildComp extends Component {
   render () {
     console.log('2. child render')
     return (
-      <div>
+      <div id="c-id">
         <h2>子组件</h2>
         <div>{this.props.value}</div>
       </div>
@@ -96,7 +96,7 @@ class AppComponent extends Component {
     console.log('3. render')
     const { num, name } = this.state
     return (
-      <div>
+      <div id="p-id">
         {num === 4 ? null : <ChildComp value={num}/>}
         <h2>{name}</h2>
         <div>{num}</div>

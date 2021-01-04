@@ -1,4 +1,4 @@
-import { createDOM } from './react-dom'
+import { compareTowVDom } from './react-dom'
 
 export const updateQueue = {
   isBatchingUpdate: false,
@@ -73,18 +73,21 @@ export default class Component {
     if (this.componentWillUpdate) this.componentWillUpdate()
     // 父类调用子类实例方法？？？？？
     const vDom = this.render()
-    updateClassComponent(this, vDom)
+    // updateClassComponent(this, vDom)
+    console.log(this.oldVDom.instance)
+    compareTowVDom(this.oldVDom.dom.parentNode, this.oldVDom, vDom)
+    this.oldVDom = vDom
     if (this.componentDidUpdate) this.componentDidUpdate()
   }
 }
 
 
-function updateClassComponent (instance, vDom) {
+/*function updateClassComponent (instance, vDom) {
   const oldDom = instance.dom
   const newDom = createDOM(vDom)
   oldDom.parentNode.replaceChild(newDom, oldDom)
   instance.dom = newDom
-}
+}*/
 
 function shouldUpdate (instance, state) {
   instance.state = state
