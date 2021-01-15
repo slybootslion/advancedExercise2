@@ -17,9 +17,9 @@ export default memo(function App () {
     <Provider store={store}>
       <HashRouter>
         <LuAppHeader/>
-          <Suspense fallback={<span>loading...</span>}>
-            {renderRoutes(routes)}
-          </Suspense>
+        <Suspense fallback={<span>loading...</span>}>
+          {renderRoutes(routes)}
+        </Suspense>
         <LuAppFooter/>
         <AppPlayerBar/>
       </HashRouter>
